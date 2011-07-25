@@ -55,7 +55,7 @@ parseColor=function(cache, t) {
 *   sorted = test.sort( numLexSort );
 *   // results [ -4, 9, "9a", "9c", "23", "23zy", "bar", "foo", [0,1] ];
 */
-var numLexSort = (function() {
+var numLexSort = (function( undefined ) {
   var rSep = /^(-?\d+)?([^\d]+)?$/,
       rValid = /(st|mb)/;
   return function( a, b ) {
