@@ -1,15 +1,16 @@
-/* snippets.js - just a collection of random js
+/*!
+* snippets.js - just a collection of random js
 *  If adding to this list via a pull reqeust, be sure to add your
-*  name and the year, like:
-*   added 2011 Jake Weary
+*  name and/or github name, and the year, like:
+*   added 2011 Jake Weary (jakeweary)
 *  Code in this file is unlicensed. Copy and paste away.
 */
 
 
 
-/*
+/*!
 * circularMod - modulus with negative support for things like arrays
-* added 2011 Dan Heberden
+* added 2011 Dan Heberden (danheberden)
 * e.g.
 *   var test = [ 0, 1, 2, 3, 4, 5 ];
 *   circularMod(   7, test.length ); // 1
@@ -22,7 +23,7 @@ function circularMod( x, mod ) {
 }
 
 
-/*
+/*!
 * parseColor - Parse a color
 * added 2011 Alex Wilson(arexkun)
 * e.g.
@@ -43,3 +44,39 @@ parseColor=function(cache, t) {
         : [0, 0, 0]
     }
 }({},256)
+
+
+/*!
+* numLexSort - Sorts numbers numerically, the rest lexicographically
+* added 2011 Dan Heberden (danheberden)
+* demo http://jsfiddle.net/danheberden/jBsNd/
+* e.g.
+*   var test = [ 9, "23zy", "9c", "bar", "9a", "23", "foo", [0,1], -4 ];
+*   sorted = test.sort( numLexSort );
+*   // results [ -4, 9, "9a", "9c", "23", "23zy", "bar", "foo", [0,1] ];
+*/
+var numLexSort = (function() {
+  var rSep = /^(-?\d+)?([^\d]+)?$/,
+      rValid = /(st|mb)/;
+  return function( a, b ) {
+    var vA = rValid.test( typeof a ),
+        vB = rValid.test( typeof b ),
+        vLex = !vA && !vB && [ a, b ].sort()[0],
+        sA = vA && ( "" + a ).match( rSep ),
+        sB = vB && ( "" + b ).match( rSep ),
+        sLex = sA && sB && ( sA[2] !== sB[2] ) &&
+                  ( sA[2] === undefined ? sA[2] :
+                    sB[2] === undefined ? sB[2] :
+                    [ sA[2], sB[2] ].sort()[0] ),
+        sNum = sA && sB && ( sA[1] === undefined && sB[1] !== undefined  ? 1 :
+                             sB[1] === undefined && sA[1] !== undefined  ? -1 :
+                             sA[1] - sB[1] );
+        return ( !vA && !vB ) ? vLex === a ? -3 : 3 :
+                !vA ? 3 :
+                !vB ? -3 :
+                sNum ? sNum :
+                sLex === sA[2] ? -2 :
+                sLex === sB[2] ? 2 : 0;
+  };
+})();
+
