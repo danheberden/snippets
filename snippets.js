@@ -33,9 +33,9 @@ function circularMod( x, mod ) {
 */
 parseColor=function(cache, t) {
     function d(a, b, c, v) {
-        
+
         v=a+(b-a)
-        
+
         c+=~c?c>1?-1:0:1
         return (c < 1 / 6 ? v * 6 * c : c < .5 ? b : c < 2 / 3 ? v * (2 / 3 - c) * 6 : a)*255
     }
@@ -84,3 +84,19 @@ var numLexSort = (function( undefined ) {
   };
 })();
 
+
+/*!
+ * isPrime - Determines if provided number is prime or not
+ * added 2011 Dan Heberden (danheberden)
+ * Special thanks to @gnarf37
+ * @param Number number to check for prime
+ * @return Boolean true if number is prime, false if not
+ */
+function isPrime( num ) {
+  for ( var limit = Math.floor( Math.sqrt( num ) ), check = 2; check <= limit; check++ ) {
+    if ( !( num % check ) ) {
+      return false;
+    }
+  }
+  return num > 1;
+}
