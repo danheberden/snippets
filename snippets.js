@@ -11,6 +11,7 @@
 /*!
 * circularMod - modulus with negative support for things like arrays
 * added 2011 Dan Heberden (danheberden)
+* updated by Corey Frang (gnarf37)
 * e.g.
 *   var test = [ 0, 1, 2, 3, 4, 5 ];
 *   circularMod(   7, test.length ); // 1
@@ -18,8 +19,9 @@
 *   circularMod( 141, test.length ); // 3
 *   circularMod( -92, test.length ); // 4
 */
-function circularMod( x, mod ) {
-  return x < 0 ? mod - ( Math.abs( x ) % mod) : x % mod;
+function circularMod( value, mod ) {
+    value %= mod;
+    return value < 0 ? mod + value : value;
 }
 
 
@@ -34,10 +36,10 @@ function circularMod( x, mod ) {
 parseColor=function(cache, t) {
     function d(a, b, c, v) {
 
-        v=a+(b-a)
+        v=a+(b-a);
 
-        c+=~c?c>1?-1:0:1
-        return (c < 1 / 6 ? v * 6 * c : c < .5 ? b : c < 2 / 3 ? v * (2 / 3 - c) * 6 : a)*255
+        c+=~c?c>1?-1:0:1;
+        return (c < 1 / 6 ? v * 6 * c : c < .5 ? b : c < 2 / 3 ? v * (2 / 3 - c) * 6 : a)*255;
     }
     return function (color, f, g, h, i) {
         return cache[color] = cache[color] ||
@@ -47,7 +49,7 @@ parseColor=function(cache, t) {
         : (h = i < .5 ? i * (1 + h) : i + h - i * h, i = 2 * i - h, [d(i, h, g + 1 / 3), d(i, h, g), d(i, h, g - 1 / 3)]))
         : [0, 0, 0]
     }
-}({},256)
+}({},256);
 
 
 /*!
