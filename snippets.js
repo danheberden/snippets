@@ -102,3 +102,27 @@ function isPrime( num ) {
   }
   return num > 1;
 }
+
+/*!
+ * pad - Pads a string or number to a set length
+ * added 2011 Dan Heberden (danheberden)
+ * @param wat What to to pad
+ * @param len How many chars/spaces/whatever to pad
+ * @param padWith What to pad with (falsy pads with 0)
+ * @param clip Clip the result to len chars
+ * @return String Padded/Clipped string of wat
+ *
+ * example:
+ *    pad( 123, 5 ); // 00123
+ *    pad( 9, 3, "-" ); // --9
+ *    pad( 12345, 2 ); // 12345
+ *    pad( 12345, 2, 0, true ); // 12
+ */
+function pad( wat, len, padWith, clip ) {
+  // get how many chars to pad & make num a string
+  len -= (wat += "").length;
+  // build the string of n+1 necessary pad chars
+  return new Array( len > 0 ? len+1 : 0 ).join( padWith || 0 ) +
+    // if clipping (we're at a negative len) slice it
+    (clip ? [].slice.call( wat, 0, len ).join('') : wat);
+}
