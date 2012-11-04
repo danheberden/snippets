@@ -20,8 +20,7 @@
 *   circularMod( -92, test.length ); // 4
 */
 function circularMod( value, mod ) {
-    value %= mod;
-    return value < 0 ? mod + value : value;
+  return ( value % mod + mod ) % mod;
 }
 
 
